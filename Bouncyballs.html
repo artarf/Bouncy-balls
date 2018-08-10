@@ -47,12 +47,22 @@ var gravity = 0,
 var audio = new Audio('Trance - 009 Sound System Dreamscape (HD).mp4');
 var bounce = new Audio('ping_pong_8bit_plop.wav');
 
+var k = 4;
+var p;
+
+
+
 balls = []
 function addBall(){
+	if (k == 4) {
+		p = 'red';
+		k += 1;
+	} else {
+		p = 'yellow';
+		k -= 1;
+	}
     console.log('Hello world')
-    console.log(c)
-    console.log(p)
-
+	console.log(k)
     balls.push(
     {
         x: Math.floor(Math.random() * W) + 0,
