@@ -50,16 +50,13 @@ var bounce = new Audio('ping_pong_8bit_plop.wav');
 balls = []
 function addBall(){
     console.log('Hello world')
-    console.log(c)
-    console.log(p)
-
     balls.push(
     {
         x: Math.floor(Math.random() * W) + 0,
         y: Math.floor(Math.random() * H) + 0,
 
         radius: 15,
-        color: p,
+        color: 'red',
 
         // Velocity components
         vx: Math.floor(Math.random() * 20) + -10,
