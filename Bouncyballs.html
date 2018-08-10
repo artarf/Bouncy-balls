@@ -43,12 +43,12 @@ var gravity = 0,
 // 2) Radius and color
 // 3) Velocity vectors
 // 4) the method to draw or paint it on the canvas
-            
+
 var audio = new Audio('Trance - 009 Sound System Dreamscape (HD).mp4');
 var bounce = new Audio('ping_pong_8bit_plop.wav');
-            
+
 var p
-var k = 6        
+var k = 6
 var c = 7
 var r = "red"
 var y = "yellow"
@@ -60,7 +60,7 @@ if(c === 3) {
     p = "red";
     var c = 7;
 }
-            
+
 balls = []
 function addBall(){
     console.log('Hello world')
@@ -71,16 +71,16 @@ function addBall(){
     {
         x: Math.floor(Math.random() * W) + 0,
         y: Math.floor(Math.random() * H) + 0,
-	
+
         radius: 15,
         color: p,
-	
+
         // Velocity components
         vx: Math.floor(Math.random() * 20) + -10,
         vy: Math.floor(Math.random() * 20) + -10,
     })
 }
-	
+
 
 function draw(ctx,ball) {
 	// Here, we'll first begin drawing the path and then use the arc() function to draw the circle. The arc function accepts 6 parameters, x position, y position, radius, start angle, end angle and a boolean for anti-clockwise direction.
@@ -112,7 +112,7 @@ function moveBall(ball) {
 		// Ohh! The ball is moving!
 		// Lets add some acceleration
 		ball.vy += gravity;
-    
+
 		//Perfect! Now, lets make it rebound when it touches the floor
 		if(ball.y + ball.radius > H) {
 			// First, reposition the ball on top of the floor and then bounce it!
@@ -120,7 +120,7 @@ function moveBall(ball) {
 			ball.vy *= -bounceFactor;
             bounce.play();
 			// The bounceFactor variable that we created decides the elasticity or how elastic the collision will be. If it's 1, then the collision will be perfectly elastic. If 0, then it will be inelastic.
-		}	
+		}
 		if(ball.x + ball.radius > W) {
 			ball.x = W - ball.radius;
 			ball.vx *= -bounceFactor;
