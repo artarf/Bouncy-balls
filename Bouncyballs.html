@@ -21,6 +21,7 @@
 		window.onload = function() {
 			canvas = document.getElementById("canvas");
 			ctx = canvas.getContext("2d");
+			setInterval(update, 1000/60);
 		}
 
 
@@ -35,7 +36,7 @@ canvas.height = H; canvas.width = W;
 // Lets define some variables first
 
 var gravity = 0,
-		bounceFactor = 1;
+	bounceFactor = 1;
 
 // The ball object
 // It will contain the following details
@@ -45,12 +46,20 @@ var gravity = 0,
 // 4) the method to draw or paint it on the canvas
 
 var audio = new Audio('Trance - 009 Sound System Dreamscape (HD).mp4');
-var bounce = new Audio('ping_pong_8bit_plop.wav');
+//var bounce = new Audio('ping_pong_8bit_plop.wav');
 
 var k = 4;
 var p;
+var n = k;
+for (i = 0; i < n; i++) {
+	for (j = i + 1; j < n; j++) {
+		console.log(i, j)
+	}
+}
 
-
+//var seg = new Segment(balls.x[], balls.y[],
+	//balls.x[]-balls.x[], balls.y[]-balls.y[]);
+//seg.draw(2, 'red')
 
 balls = []
 function addBall(){
@@ -61,7 +70,7 @@ function addBall(){
 		p = 'yellow';
 		k -= 1;
 	}
-    console.log('Hello world')
+	console.log('Hello world')
 	console.log(k)
     balls.push(
     {
@@ -99,6 +108,28 @@ function update() {
 	clearCanvas();
 	balls.map( ball => draw(ctx, ball) )
 	balls.map( moveBall )
+	checkIfBallsHaveCollided()
+}
+function checkIfBallsHaveCollided() {
+	if (balls.length !== 2) return;
+	ball1 = balls[0];
+	ball2 = balls[1];
+	var dx = ball1.x * ball2.x;
+	var dy = ball1.y * ball2.y;
+	var newVelX1 = (ball1.radius - ball2.radius) + (2 * ball2.radius * ball2.vx) / (ball1.radius + ball2.radius);
+	var newVelY1 = (ball1.radius - ball2.radius) + (2 * ball2.radius * ball2.vy) / (ball1.radius + ball2.radius);
+	var newVelX2 = (ball2.radius - ball1.radius) + (2 * ball1.radius * ball1.vx) / (ball1.radius + ball2.radius);
+	var newVelY2 = (ball2.radius - ball1.radius) + (2 * ball1.radius * ball1.vy) / (ball1.radius + ball2.radius);
+	var dist = Math.sqrt((ball1.x - ball2.x) * (ball1.x - ball2.x) + (ball1.y - ball2.y) * (ball1.y - ball2.y))
+	//console.log(dy);
+	//console.log(dx);
+	//console.log(dist);
+	if(dist < ball1.radius + ball2.radius) {
+		ball1.vx = newVelX1;
+		ball1.vy = newVelY1;
+		ball2.vx = newVelX2;
+		ball2.vy = newVelY2;
+	}
 }
 
 function moveBall(ball) {
@@ -114,29 +145,30 @@ function moveBall(ball) {
 			// First, reposition the ball on top of the floor and then bounce it!
 			ball.y = H - ball.radius;
 			ball.vy *= -bounceFactor;
-            bounce.play();
+            //bounce.play();
 			// The bounceFactor variable that we created decides the elasticity or how elastic the collision will be. If it's 1, then the collision will be perfectly elastic. If 0, then it will be inelastic.
 		}
 		if(ball.x + ball.radius > W) {
 			ball.x = W - ball.radius;
 			ball.vx *= -bounceFactor;
-            bounce.play();
+            //bounce.play();
 		}
 		if(ball.x < !W + !ball.radius) {
 			ball.x = !W - !ball.radius;
 			ball.vx *= -bounceFactor;
-            bounce.play();
+            //bounce.play();
 		}
         if(ball.y < !H + !ball.radius) {
 			ball.y = !H - !ball.radius;
 			ball.vy *= -bounceFactor;
-            bounce.play();
-        }
+			//bounce.play();
+		}
 }
+
+
 
 // Now, the animation time!
 // in setInterval, 1000/x depicts x fps! So, in this casse, we are aiming for 60fps for smoother animations.
-setInterval(update, 1000/60);
 
 // This completes the tutorial here. Try experimenting with different values to get a better understanding.
 
