@@ -50,12 +50,7 @@ var audio = new Audio('Trance - 009 Sound System Dreamscape (HD).mp4');
 
 var k = 4;
 var p;
-var n = k;
-for (i = 0; i < n; i++) {
-	for (j = i + 1; j < n; j++) {
-		console.log(i, j)
-	}
-}
+
 
 //var seg = new Segment(balls.x[], balls.y[],
 	//balls.x[]-balls.x[], balls.y[]-balls.y[]);
@@ -112,23 +107,25 @@ function update() {
 }
 function checkIfBallsHaveCollided() {
 	if (balls.length !== 2) return;
-	ball1 = balls[0];
-	ball2 = balls[1];
-	var dx = ball1.x * ball2.x;
-	var dy = ball1.y * ball2.y;
-	var newVelX1 = (ball1.radius - ball2.radius) + (2 * ball2.radius * ball2.vx) / (ball1.radius + ball2.radius);
-	var newVelY1 = (ball1.radius - ball2.radius) + (2 * ball2.radius * ball2.vy) / (ball1.radius + ball2.radius);
-	var newVelX2 = (ball2.radius - ball1.radius) + (2 * ball1.radius * ball1.vx) / (ball1.radius + ball2.radius);
-	var newVelY2 = (ball2.radius - ball1.radius) + (2 * ball1.radius * ball1.vy) / (ball1.radius + ball2.radius);
-	var dist = Math.sqrt((ball1.x - ball2.x) * (ball1.x - ball2.x) + (ball1.y - ball2.y) * (ball1.y - ball2.y))
+	for (i = 0; i < balls.length; i++) {
+		for (j = i + 1; j < balls.length; j++)
+		console.log(i, j)
+	}
+	jay = balls[i];
+	index = balls[j];
+	var newVelX1 = (index.radius - jay.radius) + (2 * jay.radius * jay.vx) / (index.radius + jay.radius);
+	var newVelY1 = (index.radius - jay.radius) + (2 * jay.radius * jay.vy) / (index.radius + jay.radius);
+	var newVelX2 = (jay.radius - index.radius) + (2 * index.radius * index.vx) / (index.radius + jay.radius);
+	var newVelY2 = (jay.radius - index.radius) + (2 * index.radius * index.vy) / (index.radius + jay.radius);
+	var dist = Math.sqrt((index.x - jay.x) * (index.x - jay.x) + (index.y - jay.y) * (index.y - jay.y))
 	//console.log(dy);
 	//console.log(dx);
 	//console.log(dist);
-	if(dist < ball1.radius + ball2.radius) {
-		ball1.vx = newVelX1;
-		ball1.vy = newVelY1;
-		ball2.vx = newVelX2;
-		ball2.vy = newVelY2;
+	if(dist < index.radius + jay.radius) {
+		index.vx = newVelX1;
+		index.vy = newVelY1;
+		jay.vx = newVelX2;
+		jay.vy = newVelY2;
 	}
 }
 
