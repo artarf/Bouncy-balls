@@ -50,6 +50,7 @@ function addBall() {
   }
   console.log('Hello world')
   balls.push({
+    state: "created"
     id: balls.length,
     x: Math.floor(Math.random() * W) + 0,
     y: Math.floor(Math.random() * H) + 0,
@@ -65,6 +66,11 @@ function addBall() {
 
 
 function draw(ctx, ball) {
+  if (ball.state == "vanished") return;
+  if (ball.state == "exploding") {
+    // do some stuff
+    return;
+  }
   // Here, we'll first begin drawing the path and then use the arc() function to draw the circle. The arc function accepts 6 parameters, x position, y position, radius, start angle, end angle and a boolean for anti-clockwise direction.
   ctx.beginPath();
   ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, false);
