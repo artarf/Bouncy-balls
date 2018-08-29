@@ -102,9 +102,6 @@ function checkIfBallsHaveCollided() {
       index = balls[i];
       jay = balls[j];
       const dist = Math.sqrt((index.x - jay.x) * (index.x - jay.x) + (index.y - jay.y) * (index.y - jay.y))
-      console.log(jay);
-      console.log(index);
-      //console.log(dist);
       if (dist < index.radius + jay.radius) {
         const newVelX1 = (index.vx * (index.radius - jay.radius) + (2 * jay.radius * jay.vx) / (index.radius + jay.radius));
         const newVelY1 = (index.vy * (index.radius - jay.radius) + (2 * jay.radius * jay.vy) / (index.radius + jay.radius));
