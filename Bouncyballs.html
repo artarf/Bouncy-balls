@@ -21,6 +21,8 @@
 			canvas = document.getElementById("canvas");
 			ctx = canvas.getContext("2d");
 			setInterval(update, 1000/60);
+			setInterval(refresh, 1000/260);
+			lastRefresh = performance.now()
 		}
 
 
@@ -34,6 +36,7 @@ canvas.height = H; canvas.width = W;
 // First of all we'll create a ball object which will contain all the methods and variables specific to the ball.
 // Lets define some variables first
 
+var lastRefresh = null;
 var gravity = 0,
 	bounceFactor = 1;
 
@@ -51,6 +54,11 @@ var k = 4;
 var p;
 
 balls = []
+
+function ballSpeed(x = .3) {
+	return Math.random() * 2 * x - x
+}
+
 function addBall(){
 	if (k == 4) {
 		p = 'red';
@@ -70,8 +78,8 @@ function addBall(){
         color: p,
 
         // Velocity components
-        vx: Math.floor(Math.random() * 20) + -10,
-        vy: Math.floor(Math.random() * 20) + -10,
+        vx: ballSpeed(),
+        vy: ballSpeed()
     })
 }
 
@@ -96,9 +104,16 @@ function clearCanvas() {
 function update() {
 	clearCanvas();
 	balls.map( ball => draw(ctx, ball) )
-	balls.map( moveBall )
+}
+
+function refresh() {
+	x = performance.now()
+	delta = x - lastRefresh
+	lastRefresh = x
+	balls.map( ball => moveBall(ball, delta) )
 	checkIfBallsHaveCollided()
 }
+
 function checkIfBallsHaveCollided() {
 	for (i = 0; i < balls.length; i++) {
 		for (j = i + 1; j < balls.length; j++) {
@@ -127,10 +142,10 @@ function checkIfBallsHaveCollided() {
 	}
 }
 
-function moveBall(ball) {
+function moveBall(ball, delta) {
 		// Now, lets make the ball move by adding the velocity vectors to its position
-		ball.y += ball.vy;
-		ball.x += ball.vx;
+		ball.y += ball.vy * delta;
+		ball.x += ball.vx * delta;
 		// Ohh! The ball is moving!
 		// Lets add some acceleration
 		ball.vy += gravity;
