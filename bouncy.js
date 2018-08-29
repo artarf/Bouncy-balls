@@ -54,6 +54,7 @@ function addBall() {
   console.log('Hello world')
   console.log(k)
   balls.push({
+    id: balls.length,
     x: Math.floor(Math.random() * W) + 0,
     y: Math.floor(Math.random() * H) + 0,
 
@@ -73,6 +74,8 @@ function draw(ctx, ball) {
   ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, false);
   ctx.fillStyle = ball.color;
   ctx.fill();
+  ctx.fillStyle = "white";
+  ctx.fillText(ball.id, ball.x, ball.y);
   ctx.closePath();
 }
 
