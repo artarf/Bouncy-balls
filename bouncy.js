@@ -3,6 +3,8 @@ window.onload = function() {
   ctx = canvas.getContext("2d");
   setInterval(update, 1000 / 60);
   setInterval(refresh, 1000 / 260);
+  addBall()
+  addBall()
   lastRefresh = performance.now()
 }
 
