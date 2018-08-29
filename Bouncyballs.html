@@ -163,13 +163,13 @@ function moveBall(ball, delta) {
 			ball.vx *= -bounceFactor;
             //bounce.play();
 		}
-		if(ball.x < !W + !ball.radius) {
-			ball.x = !W - !ball.radius;
+		if(ball.x < ball.radius) {
+			ball.x = ball.radius;
 			ball.vx *= -bounceFactor;
             //bounce.play();
 		}
-        if(ball.y < !H + !ball.radius) {
-			ball.y = !H - !ball.radius;
+        if(ball.y < ball.radius) {
+			ball.y = ball.radius;
 			ball.vy *= -bounceFactor;
 			//bounce.play();
 		}
