@@ -105,15 +105,15 @@ function checkIfBallsHaveCollided() {
     for (j = i + 1; j < balls.length; j++) {
       index = balls[i];
       jay = balls[j];
-      var dist = Math.sqrt((index.x - jay.x) * (index.x - jay.x) + (index.y - jay.y) * (index.y - jay.y))
+      const dist = Math.sqrt((index.x - jay.x) * (index.x - jay.x) + (index.y - jay.y) * (index.y - jay.y))
       console.log(jay);
       console.log(index);
       //console.log(dist);
       if (dist < index.radius + jay.radius) {
-        var newVelX1 = (index.vx * (index.radius - jay.radius) + (2 * jay.radius * jay.vx) / (index.radius + jay.radius));
-        var newVelY1 = (index.vy * (index.radius - jay.radius) + (2 * jay.radius * jay.vy) / (index.radius + jay.radius));
-        var newVelX2 = (jay.vx * (jay.radius - index.radius) + (2 * index.radius * index.vx) / (index.radius + jay.radius));
-        var newVelY2 = (jay.vy * (jay.radius - index.radius) + (2 * index.radius * index.vy) / (index.radius + jay.radius));
+        const newVelX1 = (index.vx * (index.radius - jay.radius) + (2 * jay.radius * jay.vx) / (index.radius + jay.radius));
+        const newVelY1 = (index.vy * (index.radius - jay.radius) + (2 * jay.radius * jay.vy) / (index.radius + jay.radius));
+        const newVelX2 = (jay.vx * (jay.radius - index.radius) + (2 * index.radius * index.vx) / (index.radius + jay.radius));
+        const newVelY2 = (jay.vy * (jay.radius - index.radius) + (2 * index.radius * index.vy) / (index.radius + jay.radius));
         index.x = index.x;
         index.y = index.y;
         jay.x = jay.x;
